@@ -21,10 +21,12 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title, this.total}) : super(key: key);
+  MyHomePage({Key key, this.title, this.total, this.feedbackForm})
+      : super(key: key);
 
   final String title;
   final int total;
+  final FeedbackForm feedbackForm;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -52,6 +54,26 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController lvlodcController = TextEditingController();
   TextEditingController basetrayController = TextEditingController();
   TextEditingController ketController = TextEditingController();
+  FeedbackForm get feedbackForm => widget.feedbackForm;
+
+  @override
+  void initState() {
+    if (feedbackForm.no != null) {
+      teknisiController.text = feedbackForm.teknisi;
+      pekerjaanController.text = feedbackForm.pekerjaan;
+      stoController.text = feedbackForm.sto;
+      namaController.text = feedbackForm.nama;
+      oaksesController.text = feedbackForm.oakses;
+      eaksesController.text = feedbackForm.eakses;
+      gponController.text = feedbackForm.gpon;
+      etransController.text = feedbackForm.etrans;
+      lvlftmController.text = feedbackForm.lvlftm.toString();
+      lvlodcController.text = feedbackForm.lvlodc.toString();
+      basetrayController.text = feedbackForm.basetray;
+      ketController.text = feedbackForm.ket;
+    }
+    super.initState();
+  }
 
   // Method to Submit Feedback and save it in Google Sheets
   void _submitForm() {

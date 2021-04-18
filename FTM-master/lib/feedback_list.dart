@@ -47,7 +47,7 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
       });
     });
 
-    setState(() {});
+    // setState(() {});
   }
 
   @override
@@ -80,7 +80,14 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
                   var item = feedbackItems[index];
                   return ListTile(
                     onTap: () {
-                      _deleteData(item.no);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyHomePage(
+                                    feedbackForm: item,
+                                    title: 'Tambah Data',
+                                    total: feedbackItems.length,
+                                  )));
                     },
                     title: Row(
                       children: <Widget>[
