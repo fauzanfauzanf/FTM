@@ -57,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _submitForm() {
     // Validate returns true if the form is valid, or false
     // otherwise.
+    print(_formKey.currentState.validate());
     if (_formKey.currentState.validate()) {
       // If the form is valid, proceed.
       int number = widget.total + 1;
@@ -86,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (response == FormController.STATUS_SUCCESS) {
           // Feedback is saved succesfully in Google Sheets.
           _showSnackbar("Data Submitted");
+          Navigator.pop(context);
         } else {
           // Error Occurred while saving data in Google Sheets.
           _showSnackbar("Error Occurred!");
@@ -108,10 +110,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
+      body: ListView(
+        children: <Widget>[
+          Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Form(
                   key: _formKey,
@@ -133,25 +136,36 @@ class _MyHomePageState extends State<MyHomePage> {
                         TextFormField(
                           controller: pekerjaanController,
                           validator: (value) {
-                            if (!value.contains("@")) {
+                            if (value.isEmpty) {
                               return 'Enter Valid pekerjaan';
                             }
                             return null;
                           },
                           keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(labelText: 'Email'),
+                          decoration: InputDecoration(labelText: 'Pekerjaan'),
                         ),
                         TextFormField(
                           controller: stoController,
                           validator: (value) {
-                            if (value.trim().length != 3) {
-                              return 'Enter 3 Digit Text';
+                            if (value.isEmpty) {
+                              return 'Enter Text';
                             }
                             return null;
                           },
-                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             labelText: 'STO',
+                          ),
+                        ),
+                        TextFormField(
+                          controller: namaController,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Enter Text';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'Nama ODC',
                           ),
                         ),
                         TextFormField(
@@ -204,6 +218,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             return null;
                           },
                           decoration: InputDecoration(labelText: 'Level FTM'),
+                          keyboardType: TextInputType.number,
                         ),
                         TextFormField(
                           controller: lvlodcController,
@@ -214,6 +229,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             return null;
                           },
                           decoration: InputDecoration(labelText: 'Level ODC'),
+                          keyboardType: TextInputType.number,
                         ),
                         TextFormField(
                           controller: basetrayController,
@@ -258,9 +274,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: Text('View Data'),
               ),
+              SizedBox(
+                height: 220.0,
+              )
             ],
           ),
-        ),
+        ],
       ),
     );
   }

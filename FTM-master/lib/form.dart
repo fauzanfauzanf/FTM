@@ -10,8 +10,8 @@ class FeedbackForm {
   String eakses;
   String gpon;
   String etrans;
-  String lvlftm;
-  String lvlodc;
+  dynamic lvlftm;
+  dynamic lvlodc;
   String basetray;
   String ket;
 

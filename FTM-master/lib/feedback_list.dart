@@ -94,7 +94,7 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
                       children: <Widget>[
                         Icon(Icons.message),
                         Expanded(
-                          child: Text(feedbackItems[index].teknisi),
+                          child: Text("${feedbackItems[index].teknisi}"),
                         )
                       ],
                     ),

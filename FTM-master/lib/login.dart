@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'CustomIcons.dart';
 import 'Widgets/FormCard.dart';
 import 'Widgets/SocialIcons.dart';
+import 'feedback_list.dart';
 import 'main.dart';
 
 class Login extends StatefulWidget {
@@ -139,7 +140,7 @@ class _LoginState extends State<Login> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            MyHomePage(title: 'Aplikasi FTM')));
+                                            FeedbackListScreen()));
                               },
                               child: Center(
                                 child: Text("SIGNIN",
